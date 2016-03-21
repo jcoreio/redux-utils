@@ -1,4 +1,4 @@
-import {keys, mapValues} from 'lodash';
+import {keys} from 'lodash';
 
 export default function createReducer(initialState, actionHandlers) {
   if (arguments.length === 1) {
