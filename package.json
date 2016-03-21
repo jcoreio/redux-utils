@@ -1,6 +1,6 @@
 {
   "name": "mindfront-redux-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "functions for creating and composing reducers and middleware efficiently",
   "main": "dist/index.js",
   "scripts": {
