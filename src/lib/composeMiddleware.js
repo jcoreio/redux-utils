@@ -4,7 +4,7 @@ import createMiddleware from './createMiddleware';
 export default function composeMiddleware(...middlewares) {
   middlewares = compact(middlewares);
 
-  if (middlewares.length === 0) return store => next => action => next(action);
+  if (middlewares.length === 0) return store => dispatch => dispatch;
   if (middlewares.length === 1) return middlewares[0];
 
   if (every(middlewares, middleware => middleware.actionHandlers)) {
@@ -17,5 +17,8 @@ export default function composeMiddleware(...middlewares) {
     });
     return createMiddleware(mapValues(actionHandlers, typeHandlers => composeMiddleware(...typeHandlers)));
   }
-  return store => next => action => middlewares.reduceRight((next, middleware) => middleware(store)(next), next)(action);
+  return store => {
+    const handlers = middlewares.map(middleware => middleware(store))
+    return dispatch => handlers.reduceRight((next, handler) => handler(next), dispatch)
+  }
 }
