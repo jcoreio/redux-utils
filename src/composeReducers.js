@@ -1,10 +1,8 @@
-import {reduce, every, forEach, mapValues, identity, compact} from 'lodash'
+import {reduce, every, forEach, mapValues} from 'lodash'
 import createReducer from './createReducer'
 
 export default function composeReducers(...reducers) {
-  reducers = compact(reducers)
-
-  if (reducers.length === 0) return identity
+  if (reducers.length === 0) return state => state
   if (reducers.length === 1) return reducers[0]
 
   // if all reducers have actionHandlers maps, merge the maps using composeReducers
