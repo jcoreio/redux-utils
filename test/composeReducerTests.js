@@ -3,6 +3,9 @@ import createReducer from '../src/createReducer'
 import composeReducers from '../src/composeReducers'
 
 describe('composeReducers', () => {
+  it("returns identity function if no reducers are given", () => {
+    expect(composeReducers()('wat')).to.equal('wat')
+  })
   it("returns a reducer that applies all arguments if any are missing actionHandlers", () => {
     let reducer = composeReducers(
       (state = {}, action) => Object.assign({}, state, {field0: action.payload}),

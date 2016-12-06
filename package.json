@@ -77,7 +77,15 @@
     "rimraf": "^2.5.4",
     "sinon": "^1.17.6"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash.compact": "^3.0.1",
+    "lodash.every": "^4.6.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.mapvalues": "^4.6.0",
+    "lodash.memoize": "^4.1.2",
+    "lodash.reduce": "^4.6.0",
+    "lodash.size": "^4.2.0"
+  },
   "pre-commit": [
     "lint",
     "flow"

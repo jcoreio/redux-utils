@@ -1,4 +1,7 @@
-import {reduce, every, forEach, mapValues} from 'lodash'
+import reduce from 'lodash.reduce'
+import every from 'lodash.every'
+import forEach from 'lodash.foreach'
+import mapValues from 'lodash.mapvalues'
 import createReducer from './createReducer'
 
 export default function composeReducers(...reducers) {

@@ -1,4 +1,4 @@
-import {keys} from 'lodash'
+import size from 'lodash.size'
 
 export default function createReducer(initialState, actionHandlers) {
   if (arguments.length === 1) {
@@ -7,7 +7,7 @@ export default function createReducer(initialState, actionHandlers) {
   }
 
   let result
-  if (keys(actionHandlers).length) {
+  if (size(actionHandlers)) {
     result = (state = initialState, action) => {
       let reducer = actionHandlers[action.type]
       return reducer ? reducer(state, action) : state

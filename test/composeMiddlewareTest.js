@@ -1,8 +1,17 @@
 import {expect} from 'chai'
 import createMiddleware from '../src/createMiddleware'
 import composeMiddleware from '../src/composeMiddleware'
+import sinon from 'sinon'
 
 describe('composeMiddleware', () => {
+  it('returns pass-through middleware if no middlewares are given', () => {
+    const dispatch = sinon.spy()
+    const middleware = composeMiddleware()
+    const store = {store: true}
+    const action = {type: 'a'}
+    middleware(store)(dispatch)(action)
+    expect(dispatch.args).to.deep.equal([[action]])
+  })
   it('composes middleware without actionHandlers properly', () => {
     let index = 0
     let callsA = []

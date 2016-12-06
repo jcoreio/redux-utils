@@ -1,9 +1,9 @@
-import {every, forEach, mapValues, compact} from 'lodash'
+import every from 'lodash.every'
+import forEach from 'lodash.foreach'
+import mapValues from 'lodash.mapvalues'
 import createMiddleware from './createMiddleware'
 
 export default function composeMiddleware(...middlewares) {
-  middlewares = compact(middlewares)
-
   if (middlewares.length === 0) return store => dispatch => dispatch
   if (middlewares.length === 1) return middlewares[0]
 
