@@ -1,3 +1,8 @@
+# mindfront-redux-utils
+
+[![Build Status](https://travis-ci.org/jcoreio/redux-utils.svg?branch=master)](https://travis-ci.org/jcoreio/redux-utils)
+[![Coverage Status](https://coveralls.io/repos/github/jcoreio/redux-utils/badge.svg?branch=master)](https://coveralls.io/github/jcoreio/redux-utils?branch=master)
+
 ## createReducer([initialState: any,] actionHandlers: {[actionType: string]: Reducer}): Reducer
 ```js
 import {createReducer} from 'mindfront-redux-utils';
