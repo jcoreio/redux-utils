@@ -53,3 +53,4 @@ import {createPluggableMiddleware} from 'mindfront-redux-utils';
 Creates a middleware that delegates to a hot-swappable middleware.  The returned middleware will have a
 `replaceMiddleware(nextMiddleware: Middleware)` function.  This way you can use Webpack hot reloading on
 your custom middleware.
+

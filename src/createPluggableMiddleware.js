@@ -12,7 +12,7 @@ export default function createPluggableMiddleware(middleware) {
   const result = store => next => {
     const dispatch = memoize(middleware => middleware ? middleware(store)(next) : next)
     return action => dispatch(middleware)(action)
-  };
-  result.replaceMiddleware = nextMiddleware => middleware = nextMiddleware;
-  return result;
+  }
+  result.replaceMiddleware = nextMiddleware => middleware = nextMiddleware
+  return result
 }

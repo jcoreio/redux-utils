@@ -6,11 +6,11 @@ export default function createMiddleware(actionHandlers) {
     return next => {
       const handlersForNext = mapValues(handlersForStore, handler => handler(next))
       return action => {
-        const handler = handlersForNext[action.type];
-        return handler ? handler(action) : next(action);
-      };
+        const handler = handlersForNext[action.type]
+        return handler ? handler(action) : next(action)
+      }
     }
   }
-  result.actionHandlers = actionHandlers;
-  return result;
+  result.actionHandlers = actionHandlers
+  return result
 }

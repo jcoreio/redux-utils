@@ -1,7 +1,10 @@
-import createReducer from './lib/createReducer';
-import composeReducers from './lib/composeReducers';
-import createMiddleware from './lib/createMiddleware';
-import composeMiddleware from './lib/composeMiddleware';
-import createPluggableMiddleware from './lib/createPluggableMiddleware';
+// @flow
 
-export {createReducer, composeReducers, createMiddleware, composeMiddleware, createPluggableMiddleware};
+import createReducer from './createReducer'
+import composeReducers from './composeReducers'
+import createMiddleware from './createMiddleware'
+import composeMiddleware from './composeMiddleware'
+import createPluggableMiddleware from './createPluggableMiddleware'
+
+export {createReducer, composeReducers, createMiddleware, composeMiddleware, createPluggableMiddleware}
+
