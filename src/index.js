@@ -5,7 +5,7 @@ import composeReducers from './composeReducers'
 import createMiddleware from './createMiddleware'
 import composeMiddleware from './composeMiddleware'
 import createPluggableMiddleware from './createPluggableMiddleware'
-import prefixReducerActionTypes from './prefixReducerActionTypes'
+import prefixReducer from './prefixReducer'
 
 export {
   createReducer,
@@ -13,6 +13,6 @@ export {
   createMiddleware,
   composeMiddleware,
   createPluggableMiddleware,
-  prefixReducerActionTypes,
+  prefixReducer,
 }
 
