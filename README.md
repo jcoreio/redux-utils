@@ -110,3 +110,25 @@ const setConfigEntry = prefixActionCreator('CONFIG.')(setEntry)
 
 setConfigEntry('hello', 'world').type // CONFIG.SET_ENTRY
 
+## addMeta(meta: Object): (actionCreator: ActionCreator) => ActionCreator
+```js
+import {addMeta} from 'mindfront-redux-utils';
+```
+
+An action creator decorator that assigns additional properties to created actions' `meta`.
+
+### Example
+import {addMeta} from 'mindfront-redux-utils'
+
+function setEntry(key, value) {
+  return {
+    type: 'SET_ENTRY',
+    payload: value,
+    meta: {key}
+  }
+}
+
+const setConfigEntry = addMeta({domain: 'config'})(setEntry)
+
+setConfigEntry('hello', 'world').meta // {key: 'hello', domain: 'config'}
+
