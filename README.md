@@ -88,3 +88,25 @@ reducer({}, {type: 'COUNTER_1.INCREMENT'}) // {counter1: 1}
 reducer({counter1: 3, counter2: 3}, {type: 'COUNTER_1.DECREMENT'}) // {counter1: 2, counter2: 3}
 reducer({counter1: 3, counter2: 3}, {type: 'COUNTER_2.INCREMENT'}) // {counter1: 3, counter2: 4}
 
+## prefixActionCreator(prefix: string): (actionCreator: ActionCreator) => ActionCreator
+```js
+import {prefixActionCreator} from 'mindfront-redux-utils';
+```
+
+An action creator decorator that prepends `prefix` to the `type` of the created actions.
+
+### Example
+import {prefixActionCreator} from 'mindfront-redux-utils'
+
+function setEntry(key, value) {
+  return {
+    type: 'SET_ENTRY',
+    payload: value,
+    meta: {key}
+  }
+}
+
+const setConfigEntry = prefixActionCreator('CONFIG.')(setEntry)
+
+setConfigEntry('hello', 'world').type // CONFIG.SET_ENTRY
+
