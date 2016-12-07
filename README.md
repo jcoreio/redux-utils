@@ -59,3 +59,32 @@ Creates a middleware that delegates to a hot-swappable middleware.  The returned
 `replaceMiddleware(nextMiddleware: Middleware)` function.  This way you can use Webpack hot reloading on
 your custom middleware.
 
+## prefixReducer(prefix: string): (reducer: Reducer) => Reducer
+```js
+import {prefixReducer} from 'mindfront-redux-utils';
+```
+
+A reducer decorator that strips `prefix` from each `action.type` before passing it to the decorated `reducer`.
+If the `action.type` doesn't start with `prefix`, it will just return the `state` instead of calling `reducer`.
+
+If the decorated reducer has `actionHandlers` (from `createReducer`), then the returned reducer will have
+`actionHandlers` with the prefixed action type keys.
+
+### Example
+import {combineReducers} from 'redux'
+import {createReducer, prefixReducer} from 'mindfront-redux-utils'
+
+const counterReducer = createReducer(0, {
+  DECREMENT: state => state - 1,
+  INCREMENT: state => state + 1,
+})
+
+const reducer = combineReducers({
+  counter1: prefixReducer('COUNTER_1.')(counterReducer),
+  counter2: prefixReducer('COUNTER_2.')(counterReducer),
+})
+
+reducer({}, {type: 'COUNTER_1.INCREMENT'}) // {counter1: 1}
+reducer({counter1: 3, counter2: 3}, {type: 'COUNTER_1.DECREMENT'}) // {counter1: 2, counter2: 3}
+reducer({counter1: 3, counter2: 3}, {type: 'COUNTER_2.INCREMENT'}) // {counter1: 3, counter2: 4}
+

@@ -84,6 +84,7 @@
     "lodash.compact": "^3.0.1",
     "lodash.every": "^4.6.0",
     "lodash.foreach": "^4.5.0",
+    "lodash.mapkeys": "^4.6.0",
     "lodash.mapvalues": "^4.6.0",
     "lodash.memoize": "^4.1.2",
     "lodash.reduce": "^4.6.0",
