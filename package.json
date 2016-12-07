@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mindfront/redux-utils.git"
+    "url": "git+https://github.com/jcoreio/redux-utils.git"
   },
   "keywords": [
     "redux",
@@ -16,9 +16,9 @@
   "author": "Andy Edwards",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mindfront/redux-utils/issues"
+    "url": "https://github.com/jcoreio/redux-utils/issues"
   },
-  "homepage": "https://github.com/mindfront/redux-utils#readme",
+  "homepage": "https://github.com/jcoreio/redux-utils#readme",
   "scripts": {
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src test",
