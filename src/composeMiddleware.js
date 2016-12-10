@@ -17,8 +17,5 @@ export default function composeMiddleware(...middlewares) {
     })
     return createMiddleware(mapValues(actionHandlers, typeHandlers => composeMiddleware(...typeHandlers)))
   }
-  return store => {
-    const handlers = middlewares.map(middleware => middleware(store))
-    return next => handlers.reduceRight((next, handler) => handler(next), next)
-  }
+  return store => next => middlewares.reduceRight((next, handler) => handler(store)(next), next)
 }
