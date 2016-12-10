@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/jcoreio/redux-utils.svg?branch=master)](https://travis-ci.org/jcoreio/redux-utils)
 [![Coverage Status](https://coveralls.io/repos/github/jcoreio/redux-utils/badge.svg?branch=master)](https://coveralls.io/github/jcoreio/redux-utils?branch=master)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 ## createReducer([initialState: any,] actionHandlers: {[actionType: string]: Reducer}): Reducer
 ```js
@@ -71,6 +72,7 @@ If the decorated reducer has `actionHandlers` (from `createReducer`), then the r
 `actionHandlers` with the prefixed action type keys.
 
 ### Example
+```es6
 import {combineReducers} from 'redux'
 import {createReducer, prefixReducer} from 'mindfront-redux-utils'
 
@@ -87,6 +89,7 @@ const reducer = combineReducers({
 reducer({}, {type: 'COUNTER_1.INCREMENT'}) // {counter1: 1}
 reducer({counter1: 3, counter2: 3}, {type: 'COUNTER_1.DECREMENT'}) // {counter1: 2, counter2: 3}
 reducer({counter1: 3, counter2: 3}, {type: 'COUNTER_2.INCREMENT'}) // {counter1: 3, counter2: 4}
+```
 
 ## prefixActionCreator(prefix: string): (actionCreator: ActionCreator) => ActionCreator
 ```js
@@ -96,6 +99,7 @@ import {prefixActionCreator} from 'mindfront-redux-utils';
 An action creator decorator that prepends `prefix` to the `type` of the created actions.
 
 ### Example
+```es6
 import {prefixActionCreator} from 'mindfront-redux-utils'
 
 function setEntry(key, value) {
@@ -109,6 +113,7 @@ function setEntry(key, value) {
 const setConfigEntry = prefixActionCreator('CONFIG.')(setEntry)
 
 setConfigEntry('hello', 'world').type // CONFIG.SET_ENTRY
+```
 
 ## addMeta(meta: Object): (actionCreator: ActionCreator) => ActionCreator
 ```js
@@ -118,6 +123,7 @@ import {addMeta} from 'mindfront-redux-utils';
 An action creator decorator that assigns additional properties to created actions' `meta`.
 
 ### Example
+```es6
 import {addMeta} from 'mindfront-redux-utils'
 
 function setEntry(key, value) {
@@ -131,4 +137,6 @@ function setEntry(key, value) {
 const setConfigEntry = addMeta({domain: 'config'})(setEntry)
 
 setConfigEntry('hello', 'world').meta // {key: 'hello', domain: 'config'}
+```
+
 
