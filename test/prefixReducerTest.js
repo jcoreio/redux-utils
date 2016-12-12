@@ -26,6 +26,16 @@ describe('prefixReducer', () => {
     expect(reducer2(1, {type: 'TEST.DECREMENT'})).to.equal(0)
     expect(reducer2(1, {type: 'BLAH.DECREMENT'})).to.equal(1)
   })
+  it('ignores actions without type', () => {
+    const reducer = (state, action) => action.type === 'INCREMENT' ? state + 1 : state
+    const reducer2 = prefixReducer('TEST.')(reducer)
+    expect(reducer2(1, {})).to.equal(1)
+  })
+  it('ignores actions non-string type', () => {
+    const reducer = (state, action) => action.type === 'INCREMENT' ? state + 1 : state
+    const reducer2 = prefixReducer('TEST.')(reducer)
+    expect(reducer2(1, {type: {}})).to.equal(1)
+  })
 })
 
 
