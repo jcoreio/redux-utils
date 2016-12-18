@@ -1,16 +1,10 @@
-import mapValues from 'lodash.mapvalues'
-
 export default function createMiddleware(actionHandlers) {
-  const result = store => {
-    const handlersForStore = mapValues(actionHandlers, handler => handler(store))
-    return next => {
-      const handlersForNext = mapValues(handlersForStore, handler => handler(next))
-      return action => {
-        const handler = handlersForNext[action.type]
-        return handler ? handler(action) : next(action)
-      }
-    }
+  const result = store => next => action => {
+    const handler = actionHandlers[action.type]
+    if (!handler) return next(action)
+    return handler(store)(next)(action)
   }
   result.actionHandlers = actionHandlers
   return result
 }
+
