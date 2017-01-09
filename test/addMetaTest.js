@@ -40,5 +40,26 @@ describe('addMeta', () => {
       meta: {domain: 'config'},
     })
   })
+  it('works directly on actions instead of action creators', () => {
+    function setEntry(key, value) {
+      return {
+        type: 'SET_ENTRY',
+        payload: value,
+        meta: {key}
+      }
+    }
+
+    expect(addMeta({domain: 'config'})(setEntry('hello', 'world'))).to.deep.equal({
+      type: 'SET_ENTRY',
+      payload: 'world',
+      meta: {key: 'hello', domain: 'config'},
+    })
+
+    expect(addMeta({key: 'blah', domain: 'config'})(setEntry('hello', 'world'))).to.deep.equal({
+      type: 'SET_ENTRY',
+      payload: 'world',
+      meta: {key: 'blah', domain: 'config'},
+    })
+  })
 })
 

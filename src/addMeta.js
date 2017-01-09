@@ -1,13 +1,15 @@
 export default function addMeta(meta) {
-  return actionCreator => (...args) => {
-    const action = actionCreator(...args)
+  function addMetaToAction(action) {
     return {
-      ...action,
+    ...action,
       meta: {
-        ...action.meta,
-        ...meta
-      }
+    ...action.meta,
+    ...meta,
+    }
     }
   }
+  return actionOrCreator => actionOrCreator instanceof Function
+    ? (...args) => addMetaToAction(actionOrCreator(...args))
+    : addMetaToAction(actionOrCreator)
 }
 

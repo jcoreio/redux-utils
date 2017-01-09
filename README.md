@@ -120,7 +120,7 @@ setConfigEntry('hello', 'world').type // CONFIG.SET_ENTRY
 import {addMeta} from 'mindfront-redux-utils';
 ```
 
-An action creator decorator that assigns additional properties to created actions' `meta`.
+An action or action creator decorator that assigns additional properties to actions' `meta`.
 
 ### Example
 ```es6
@@ -134,9 +134,13 @@ function setEntry(key, value) {
   }
 }
 
-const setConfigEntry = addMeta({domain: 'config'})(setEntry)
+const forConfigDomain = addMeta({domain: 'config'})
+
+const setConfigEntry = forConfigDomain(setEntry)
 
 setConfigEntry('hello', 'world').meta // {key: 'hello', domain: 'config'}
+
+forConfigDomain(setEntry('hello', 'world')).meta // {key: 'hello', domain: 'config'}
 ```
 
 
