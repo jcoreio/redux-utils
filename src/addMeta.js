@@ -1,11 +1,11 @@
 export default function addMeta(meta) {
   function addMetaToAction(action) {
     return {
-    ...action,
+      ...action,
       meta: {
-    ...action.meta,
-    ...meta,
-    }
+        ...action.meta,
+        ...meta,
+      }
     }
   }
   return actionOrCreator => actionOrCreator instanceof Function
