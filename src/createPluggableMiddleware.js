@@ -1,4 +1,5 @@
 import memoize from 'lodash.memoize'
+import checkForNonFunctions from './checkForNonFunctions'
 
 /**
  * This is used for hot reloading redux middleware.
@@ -9,10 +10,15 @@ import memoize from 'lodash.memoize'
  * hmrMiddleware.replaceMiddleware(myNewMiddleware);
  */
 export default function createPluggableMiddleware(middleware) {
+  if (process.env.NODE_ENV !== 'production') checkForNonFunctions(middleware, 'middleware')
+
   const result = store => next => {
     const dispatch = memoize(middleware => middleware ? middleware(store)(next) : next)
     return action => dispatch(middleware)(action)
   }
-  result.replaceMiddleware = nextMiddleware => middleware = nextMiddleware
+  result.replaceMiddleware = nextMiddleware => {
+    if (process.env.NODE_ENV !== 'production') checkForNonFunctions(nextMiddleware, 'nextMiddleware')
+    middleware = nextMiddleware
+  }
   return result
 }

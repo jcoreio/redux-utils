@@ -1,5 +1,8 @@
 {
   "extends": [
     "@jedwards1211/eslint-config", "@jedwards1211/eslint-config-flow"
-  ]
+  ],
+  "globals": {
+    "process": false
+  }
 }

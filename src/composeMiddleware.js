@@ -2,10 +2,13 @@ import every from 'lodash.every'
 import forEach from 'lodash.foreach'
 import mapValues from 'lodash.mapvalues'
 import createMiddleware from './createMiddleware'
+import checkForNonFunctions from './checkForNonFunctions'
 
 export default function composeMiddleware(...middlewares) {
   if (middlewares.length === 0) return store => dispatch => dispatch
   if (middlewares.length === 1) return middlewares[0]
+
+  if (process.env.NODE_ENV !== 'production') checkForNonFunctions(middlewares, 'middlewares')
 
   if (every(middlewares, middleware => middleware.actionHandlers)) {
     // regroup all the action handlers in the middlewares by action type.

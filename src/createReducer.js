@@ -1,10 +1,13 @@
 import size from 'lodash.size'
+import checkForNonFunctions from './checkForNonFunctions'
 
 export default function createReducer(initialState, actionHandlers) {
   if (arguments.length === 1) {
     actionHandlers = initialState
     initialState = undefined
   }
+
+  if (process.env.NODE_ENV !== 'production') checkForNonFunctions(actionHandlers, 'actionHandlers')
 
   let result
   if (size(actionHandlers)) {
