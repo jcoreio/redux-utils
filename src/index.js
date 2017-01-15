@@ -8,6 +8,7 @@ import createPluggableMiddleware from './createPluggableMiddleware'
 import prefixReducer from './prefixReducer'
 import prefixActionCreator from './prefixActionCreator'
 import addMeta from './addMeta'
+import fullStack from './fullStack'
 
 export {
   createReducer,
@@ -18,5 +19,6 @@ export {
   prefixReducer,
   prefixActionCreator,
   addMeta,
+  fullStack,
 }
 

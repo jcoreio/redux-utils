@@ -143,4 +143,54 @@ setConfigEntry('hello', 'world').meta // {key: 'hello', domain: 'config'}
 forConfigDomain(setEntry('hello', 'world')).meta // {key: 'hello', domain: 'config'}
 ```
 
+## fullStack(error: Error, wrapped?: (error: Error) => string): string
+
+Errors thrown from the sub-reducers you pass to `createReducer`, `composeReducers`, 'prefixReducer', or sub-middleware
+you pass to `createMiddleware` or `composeMiddleware` normally don't include any information about where the associated
+call to `createReducer` etc. occurred, making debugging difficult.  However, in dev mode, `mindfront-redux-utils` adds
+this info to the resulting reducers and middleware, and you can get it by calling `fullStack`, like so:
+
+```js
+import {createReducer, fullStack} from './src'
+
+function hello() {
+    throw new Error("TEST")
+}
+const r = createReducer({hello})
+
+try {
+  r({}, {type: 'hello'})
+} catch (e) {
+  console.error(fullStack(e))
+}
+```
+
+Output:
+```
+Error: TEST
+    at hello (/Users/andy/redux-utils/temp.js:4:9)
+    at result (/Users/andy/redux-utils/src/createReducer.js:19:24)
+    at withCause (/Users/andy/redux-utils/src/addCreationStack.js:5:14)
+    at Object.<anonymous> (/Users/andy/redux-utils/temp.js:9:3)
+    at Module._compile (module.js:556:32)
+    at loader (/Users/andy/redux-utils/node_modules/babel-register/lib/node.js:144:5)
+    at Object.require.extensions.(anonymous function) [as .js] (/Users/andy/redux-utils/node_modules/babel-register/lib/node.js:154:7)
+    at Module.load (module.js:473:32)
+    at tryModuleLoad (module.js:432:12)
+    at Function.Module._load (module.js:424:3)
+Caused by reducer created at:
+    at addCreationStack (/Users/andy/redux-utils/src/addCreationStack.js:2:21)
+    at createReducer (/Users/andy/redux-utils/src/createReducer.js:25:55)
+    at Object.<anonymous> (/Users/andy/redux-utils/temp.js:6:11)
+    at Module._compile (module.js:556:32)
+    at loader (/Users/andy/redux-utils/node_modules/babel-register/lib/node.js:144:5)
+    at Object.require.extensions.(anonymous function) [as .js] (/Users/andy/redux-utils/node_modules/babel-register/lib/node.js:154:7)
+    at Module.load (module.js:473:32)
+    at tryModuleLoad (module.js:432:12)
+    at Function.Module._load (module.js:424:3)
+    at Function.Module.runMain (module.js:590:10)
+```
+
+If you are using [VError](https://github.com/joyent/node-verror), you may pass VError's `fullStack` function as the
+second argument to also include the cause chain from `VError`.
 
