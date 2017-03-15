@@ -47,6 +47,16 @@ Composes the given middlewares to be called one after another, just like Redux' 
 optimization: sequences of consecutive middleware that have `actionHandlers` will be recombined into a single middleware
 that calls any `actionHandlers` for a given action directly.
 
+## applyMiddleware(...middlewares: Middleware[]): createStore => createStore'
+**Requires `redux` as an optional dependency.**
+```js
+import applyMiddleware from 'mindfront-redux-utils/lib/applyMiddleware';
+```
+
+Just like `applyMiddleware` from `redux`, but applies the same optimization as `composeMiddleware`: sequences of
+consecutive middleware that have `actionHandlers` will be recombined into a single middleware that calls any
+`actionHandlers` for a given action directly.
+
 ## combineMiddlewareWithActionHandlers(...middlewares: Middleware[]): Middleware[]
 ```js
 import {combineMiddlewareWithActionHandlers} from 'mindfront-redux-utils';
