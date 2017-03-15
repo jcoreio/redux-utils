@@ -34,7 +34,11 @@ describe('dev mode warnings', () => {
   })
   describe('composeReducers', () => {
     it('warns if any reducers are not functions', () => {
-      composeReducers(() => {}, 'hello')
+      try {
+        composeReducers(() => {}, 'hello')
+      } catch (error) {
+        // ignore
+      }
       expect(console.error.called).to.be.true
     })
     it("doesn't warn if all actionHandlers are functions", () => {

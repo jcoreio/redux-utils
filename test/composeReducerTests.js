@@ -6,7 +6,7 @@ describe('composeReducers', () => {
   it("returns identity function if no reducers are given", () => {
     expect(composeReducers()('wat')).to.equal('wat')
   })
-  it("returns a reducer that applies all arguments if any are missing actionHandlers", () => {
+  it("returns a reducer that applies all arguments", () => {
     let reducer = composeReducers(
       (state = {}, action) => Object.assign({}, state, {field0: action.payload}),
       createReducer({
@@ -41,11 +41,34 @@ describe('composeReducers', () => {
       createReducer(0, {
         action1(state) { return state * 2 },
         action2(state) { return state - 3 }
-      })
+      }),
     )
     expect(reducer(4, {type: 'action1'})).to.equal(10)
     expect(reducer(4, {type: 'action1'})).to.equal(reducer.actionHandlers.action1(4))
     expect(reducer(3, {type: 'action2'})).to.equal(12)
     expect(reducer(3, {type: 'action2'})).to.equal(reducer.actionHandlers.action2(3))
+  })
+  it('handles interleaved reducers with and without actionHandlers', () => {
+    let reducer = composeReducers(
+      createReducer(0, {
+        action1(state) { return state + 1 },
+        action2(state) { return state * 5 }
+      }),
+      createReducer(0, {
+        action1(state) { return state * 2 },
+        action2(state) { return state - 3 }
+      }),
+      state => state + 0.5,
+      createReducer(0, {
+        action1(state) { return state * 3 },
+        action2(state) { return state - 2 }
+      }),
+      createReducer(0, {
+        action1(state) { return state * 4 },
+        action2(state) { return state - 4 }
+      }),
+    )
+    expect(reducer(4, {type: 'action1'})).to.equal(31.5 * 4)
+    expect(reducer(3, {type: 'action2'})).to.equal(6.5)
   })
 })

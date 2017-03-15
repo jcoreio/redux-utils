@@ -3,7 +3,7 @@
 import createReducer from './createReducer'
 import composeReducers from './composeReducers'
 import createMiddleware from './createMiddleware'
-import composeMiddleware from './composeMiddleware'
+import composeMiddleware, {combineMiddlewareWithActionHandlers} from './composeMiddleware'
 import createPluggableMiddleware from './createPluggableMiddleware'
 import prefixReducer from './prefixReducer'
 import prefixActionCreator from './prefixActionCreator'
@@ -15,6 +15,7 @@ export {
   composeReducers,
   createMiddleware,
   composeMiddleware,
+  combineMiddlewareWithActionHandlers,
   createPluggableMiddleware,
   prefixReducer,
   prefixActionCreator,

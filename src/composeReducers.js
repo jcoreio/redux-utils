@@ -1,34 +1,56 @@
-import reduce from 'lodash.reduce'
-import every from 'lodash.every'
+import size from 'lodash.size'
 import forEach from 'lodash.foreach'
 import mapValues from 'lodash.mapvalues'
 import createReducer from './createReducer'
-import checkForNonFunctions from './checkForNonFunctions'
 import addCreationStack from './addCreationStack'
+import checkForNonFunctions from './checkForNonFunctions'
 
-export default function composeReducers(...reducers) {
+/**
+ * @param reducers an array of one or more reducers.
+ * @returns a reducer that calls all of the given reducers in sequence.
+ */
+function naiveComposeReducers(reducers) {
+  if (reducers.length === 0) return state => state
+  if (reducers.length === 1) return reducers[0]
+  const initialState = reducers.reduce((state, reducer) => reducer(state, {type: ''}), undefined)
+  return (state = initialState, action) => reducers.reduce((state, reducer) => reducer(state, action), state)
+}
+
+function composeActionHandlers(initialState, actionHandlers) {
+  return createReducer(initialState, mapValues(actionHandlers, naiveComposeReducers))
+}
+
+export function combineReducersWithActionHandlers(...reducers) {
   if (process.env.NODE_ENV !== 'production') checkForNonFunctions(reducers, 'reducers')
 
-  let result
-  if (reducers.length === 0) result = state => state
-  if (reducers.length === 1) result = reducers[0]
+  const optimizedReducers = []
+  let initialState = undefined
+  let actionHandlers = {}
 
-  // if all reducers have actionHandlers maps, merge the maps using composeReducers
-  else if (every(reducers, reducer => reducer.actionHandlers instanceof Object)) {
-    let actionHandlers = {}
-    let initialState
-    reducers.forEach(reducer => {
-      if (initialState === undefined) initialState = reducer.initialState
+  reducers.forEach(reducer => {
+    if (reducer.actionHandlers) {
+      initialState = reducer(initialState, {type: ''})
       forEach(reducer.actionHandlers, (actionHandler, type) => {
         (actionHandlers[type] || (actionHandlers[type] = [])).push(actionHandler)
       })
-    })
-    return createReducer(initialState, mapValues(actionHandlers,
-      typeHandlers => composeReducers(...typeHandlers)))
-  } else {
-    result = (state, action) => reduce(reducers, (state, reducer) => reducer(state, action), state)
-  }
-  if (process.env.NODE_ENV !== 'production') result = addCreationStack(result, 'reducer')
+    } else {
+      if (size(actionHandlers)) {
+        optimizedReducers.push(composeActionHandlers(initialState, actionHandlers))
+        actionHandlers = {}
+        initialState = undefined
+      }
+      optimizedReducers.push(reducer)
+    }
+  })
+  if (size(actionHandlers)) optimizedReducers.push(composeActionHandlers(initialState, actionHandlers))
 
+  return optimizedReducers
+}
+
+
+export default function composeReducers(...reducers) {
+  let result = naiveComposeReducers(combineReducersWithActionHandlers(...reducers))
+  if (process.env.NODE_ENV !== 'production') result = addCreationStack(result, 'reducer')
   return result
 }
+

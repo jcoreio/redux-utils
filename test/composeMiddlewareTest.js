@@ -100,28 +100,33 @@ describe('composeMiddleware', () => {
     let index = 0
     let callsA1 = []
     let callsA2 = []
+    let callsA3 = []
     let callsB1 = []
     let callsB2 = []
     let callsC1 = []
     let calls3 = []
     let middlewareA1 = store => next => action => callsA1.push({store, action, index: index++}) && next(action)
     let middlewareA2 = store => next => action => callsA2.push({store, action, index: index++}) && next(action)
+    let middlewareA3 = store => next => action => callsA3.push({store, action, index: index++}) && next(action)
     let middlewareB1 = store => next => action => callsB1.push({store, action, index: index++}) && next(action)
     let middlewareB2 = store => next => action => callsB2.push({store, action, index: index++}) && next(action)
     let middlewareC1 = store => next => action => callsC1.push({store, action, index: index++}) && next(action)
 
     let middleware1 = createMiddleware({
       a: middlewareA1,
+    })
+    let middleware2 = createMiddleware({
+      a: middlewareA3,
       b: middlewareB1,
       c: middlewareC1,
     })
-    let middleware2 = createMiddleware({
+    let middleware3 = store => next => action => calls3.push({store, action, index: index++}) && next(action)
+    let middleware4 = createMiddleware({
       a: middlewareA2,
       b: middlewareB2,
     })
-    let middleware3 = store => next => action => calls3.push({store, action, index: index++}) && next(action)
 
-    let middleware = composeMiddleware(middleware1, middleware3, middleware2)
+    let middleware = composeMiddleware(middleware1, middleware2, middleware3, middleware4)
     expect(middleware.actionHandlers).to.be.undefined
 
     let store = {store: true}
@@ -131,12 +136,13 @@ describe('composeMiddleware', () => {
     let action = {type: 'a'}
     middleware(store)(next)(action)
     expect(callsA1).to.deep.equal([{store, action, index: 0}])
-    expect(calls3).to.deep.equal([{store, action, index: 1}])
-    expect(callsA2).to.deep.equal([{store, action, index: 2}])
+    expect(callsA3).to.deep.equal([{store, action, index: 1}])
+    expect(calls3).to.deep.equal([{store, action, index: 2}])
+    expect(callsA2).to.deep.equal([{store, action, index: 3}])
     expect(callsB1).to.deep.equal([])
     expect(callsB2).to.deep.equal([])
     expect(callsC1).to.deep.equal([])
-    expect(callsNext).to.deep.equal([{action, index: 3}])
+    expect(callsNext).to.deep.equal([{action, index: 4}])
 
     index = 0
     callsA1 = []

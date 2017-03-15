@@ -23,7 +23,7 @@ import {composeReducers} from 'mindfront-redux-utils';
 
 Creates a reducer that applies all the provided reducers.
 
-If all the reducers have an `actionHandlers` property that is an object (for instance reducers made with 
+If any consecutive reducers have an `actionHandlers` property that is an object (for instance reducers made with
 `createReducer`), `composeReducers` will compose them efficiently: it will group the action handlers by type, 
 compose the handlers for each type separately, and then use `createReducer` on the composed action handlers, 
 and initial state from the first reducer for which `initialState` is defined.
@@ -43,13 +43,17 @@ The returned middleware will also have `actionHandlers` as an own property.
 import {composeMiddleware} from 'mindfront-redux-utils';
 ```
 
-Composes middleware just like `applyMiddleware` from Redux, but returns a middleware that delegates to the
-composed arguments rather than a store decorator.
+Composes the given middlewares to be called one after another, just like Redux' `applyMiddleware`, but with one
+optimization: sequences of consecutive middleware that have `actionHandlers` will be recombined into a single middleware
+that calls any `actionHandlers` for a given action directly.
 
-If all the middleware have an `actionHandlers` property that is an object (for instance middleware made with
-`createMiddleware`), `composeMiddleware` will compose them efficiently: it will group the action handlers by
-type, compose the handlers for each type separately, and then use `createMiddleware` on the composed action
-handlers.
+## combineMiddlewareWithActionHandlers(...middlewares: Middleware[]): Middleware[]
+```js
+import {combineMiddlewareWithActionHandlers} from 'mindfront-redux-utils';
+```
+
+Replaces any sequences of consecutive middleware that have `actionHandlers` in the arguments with a single middleware
+that calls the `actionHandlers` for a given action directly.  (This is used by `composeMiddleware` under the hood).
 
 ## createPluggableMiddleware(initialMiddleware: Middleware): Middleware
 ```js
