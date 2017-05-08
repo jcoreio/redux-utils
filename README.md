@@ -4,6 +4,14 @@
 [![Coverage Status](https://coveralls.io/repos/github/jcoreio/redux-utils/badge.svg?branch=master)](https://coveralls.io/github/jcoreio/redux-utils?branch=master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
+## Making Redux scalable
+
+If you use [`combineReducers`](http://redux.js.org/docs/api/combineReducers.html) to create your top-level reducer, it will call every one of your subreducers for every action you dispatch.  This is easy to debug, and it ensures your state will update correctly, but it's easy to imagine how it will create performance problems.
+
+Imagine you're combining 100 subreducers, and you're dispatching actions from a `mousemove` listener at 60 Hz.  That's 6000 subreducer calls per second, and it only increases as you add more slices to your state and corresponding subreducers to your app.
+
+This package and `mindfront-redux-utils-immutable` help you create and combine reducers and middleware in such a way that only the relevant subreducer(s) and middleware for a given action are called, so you don't have to worry that performance will decrease with every subreducer or sub-subreducer (etc) you add.
+
 ## createReducer([initialState: any,] actionHandlers: {[actionType: string]: Reducer}): Reducer
 ```js
 import {createReducer} from 'mindfront-redux-utils';
