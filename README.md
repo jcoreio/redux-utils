@@ -10,7 +10,7 @@ If you use [`combineReducers`](http://redux.js.org/docs/api/combineReducers.html
 
 Imagine you're combining 100 subreducers, and you're dispatching actions from a `mousemove` listener at 60 Hz.  That's 6000 subreducer calls per second, and it only increases as you add more slices to your state and corresponding subreducers to your app.
 
-This package and `mindfront-redux-utils-immutable` help you create and combine reducers and middleware in such a way that only the relevant subreducer(s) and middleware for a given action are called, so you don't have to worry that performance will decrease with every subreducer or sub-subreducer (etc) you add.
+This package and [`mindfront-redux-utils-immutable`](https://github.com/jcoreio/redux-utils-immutable) help you create and combine reducers and middleware in such a way that only the relevant subreducer(s) and middleware for a given action are called, so you don't have to worry that performance will decrease with every subreducer or sub-subreducer (etc) you add.
 
 ## createReducer([initialState: any,] actionHandlers: {[actionType: string]: Reducer}): Reducer
 ```js
