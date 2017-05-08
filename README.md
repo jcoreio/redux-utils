@@ -12,6 +12,8 @@ Imagine you're combining 100 subreducers, and you're dispatching actions from a 
 
 This package and [`mindfront-redux-utils-immutable`](https://github.com/jcoreio/redux-utils-immutable) help you create and combine reducers and middleware in such a way that only the relevant subreducer(s) and middleware for a given action are called, so you don't have to worry that performance will decrease with every subreducer or sub-subreducer (etc) you add.
 
+There is a downside to this approach: debugging is more difficult, because it's harder to trace where a subreducer is getting called from (or why it's not getting called).  This package tries to mitigate that problem as much as it can by saving stack traces of where reducers were created and combined.
+
 ## createReducer([initialState: any,] actionHandlers: {[actionType: string]: Reducer}): Reducer
 ```js
 import {createReducer} from 'mindfront-redux-utils';
