@@ -1,9 +1,26 @@
 {
-  "presets": ["es2015", "stage-1", "flow"],
-  "plugins": ["transform-runtime"],
+  "presets": [
+    "stage-1", "flow"
+  ],
   "env": {
     "test": {
-      "plugins": ["istanbul"]
-    }
+      "presets": [
+        ["env", {"targets": {"node": "current"}}],
+        "stage-1", "flow"
+      ],
+      "plugins": [
+        "transform-runtime",
+        "istanbul"
+      ]
+    },
+    "es5": {
+      "presets": [
+        ["env", {"forceAllTransforms": true}],
+        "stage-1", "flow"
+      ],
+      "plugins": [
+        "transform-runtime"
+      ]
+    },
   }
 }

@@ -27,7 +27,7 @@ describe('composeReducers', () => {
         action2(state, action) { return Object.assign({}, state, {field2: action.payload})}
       })
     )
-    expect(reducer.actionHandlers).to.be.defined
+    expect(reducer.actionHandlers).to.exist
     expect(reducer.initialState).to.deep.equal({})
     expect(reducer(undefined, {type: 'action1', payload: 'test'})).to.deep.equal({field1: 'test'})
     expect(reducer(undefined, {type: 'action2', payload: 'test'})).to.deep.equal({field2: 'test'})

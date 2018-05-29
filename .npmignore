@@ -5,6 +5,14 @@ scripts
 node_modules
 .babelrc
 .eslintrc
-.flowconfig
 .travis.yml
+<<<<<<< HEAD
 
+=======
+.eslintcache
+.idea
+solano.yml
+renovate.json
+commitlint.config.js
+flow-typed
+>>>>>>> bb3ada4e8867cc3ed4d5995dc8f48afa090f65d0
