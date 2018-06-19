@@ -2,9 +2,6 @@ coverage
 .nyc_output
 node_modules
 lib
-<<<<<<< HEAD
-
-=======
 module
+es
 .eslintcache
->>>>>>> bb3ada4e8867cc3ed4d5995dc8f48afa090f65d0

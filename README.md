@@ -15,6 +15,11 @@ This package and [`mindfront-redux-utils-immutable`](https://github.com/jcoreio/
 
 There is a downside to this approach: debugging is more difficult, because it's harder to trace where a subreducer is getting called from (or why it's not getting called).  This package tries to mitigate that problem as much as it can by saving stack traces of where reducers were created and combined.
 
+## Legacy build note
+
+If you are building for legacy browsers with webpack or similar bundlers, make sure to add a rule
+to transpile this package with babel.
+
 ## createReducer([initialState: any,] actionHandlers: {[actionType: string]: Reducer}): Reducer
 ```js
 import {createReducer} from 'mindfront-redux-utils';

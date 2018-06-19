@@ -1,4 +1,4 @@
-import every from 'lodash.every'
+import { every } from "lodash"
 
 /* global console */
 

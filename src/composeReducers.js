@@ -1,6 +1,4 @@
-import size from 'lodash.size'
-import forEach from 'lodash.foreach'
-import mapValues from 'lodash.mapvalues'
+import { size, forEach, mapValues } from "lodash"
 import createReducer from './createReducer'
 import addCreationStack from './addCreationStack'
 import checkForNonFunctions from './checkForNonFunctions'

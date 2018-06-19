@@ -1,4 +1,4 @@
-import size from 'lodash.size'
+import { size } from "lodash"
 import checkForNonFunctions from './checkForNonFunctions'
 import addCreationStack from './addCreationStack'
 

@@ -1,4 +1,4 @@
-import memoize from 'lodash.memoize'
+import { memoize } from "lodash"
 import checkForNonFunctions from './checkForNonFunctions'
 
 /**

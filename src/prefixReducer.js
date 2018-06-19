@@ -1,4 +1,4 @@
-import mapKeys from 'lodash.mapkeys'
+import { mapKeys } from "lodash"
 import createReducer from './createReducer'
 import addCreationStack from './addCreationStack'
 

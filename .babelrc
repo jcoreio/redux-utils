@@ -1,4 +1,11 @@
 {
+  "plugins": [
+    "syntax-dynamic-import",
+    "transform-class-properties",
+    "transform-export-extensions",
+    "transform-object-rest-spread",
+    "lodash"
+  ],
   "presets": [
     "stage-1", "flow"
   ],
@@ -10,6 +17,17 @@
       ],
       "plugins": [
         "transform-runtime",
+	"lodash"
+      ]
+    },
+    "coverage": {
+      "presets": [
+        ["env", {"targets": {"node": "current"}}],
+        "flow"
+      ],
+      "plugins": [
+        "transform-runtime",
+	"lodash",
         "istanbul"
       ]
     },
@@ -19,7 +37,8 @@
         "stage-1", "flow"
       ],
       "plugins": [
-        "transform-runtime"
+        "transform-runtime",
+	"lodash"
       ]
     },
   }
