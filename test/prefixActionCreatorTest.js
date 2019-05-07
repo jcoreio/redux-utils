@@ -1,4 +1,4 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import prefixActionCreator from '../src/prefixActionCreator'
 
 describe('prefixActionCreator', () => {
@@ -7,16 +7,16 @@ describe('prefixActionCreator', () => {
       return {
         type: 'SET_ENTRY',
         payload: value,
-        meta: {key}
+        meta: { key },
       }
     }
 
-    expect(prefixActionCreator('TEST.')(setEntry)('hello', 'world')).to.deep.equal({
+    expect(
+      prefixActionCreator('TEST.')(setEntry)('hello', 'world')
+    ).to.deep.equal({
       type: 'TEST.SET_ENTRY',
       payload: 'world',
-      meta: {key: 'hello'}
+      meta: { key: 'hello' },
     })
   })
 })
-
-

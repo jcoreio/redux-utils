@@ -1,4 +1,4 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import addMeta from '../src/addMeta'
 
 describe('addMeta', () => {
@@ -7,22 +7,22 @@ describe('addMeta', () => {
       return {
         type: 'SET_ENTRY',
         payload: value,
-        meta: {key}
+        meta: { key },
       }
     }
 
-    const setEntry2 = addMeta({domain: 'config'})(setEntry)
+    const setEntry2 = addMeta({ domain: 'config' })(setEntry)
     expect(setEntry2('hello', 'world')).to.deep.equal({
       type: 'SET_ENTRY',
       payload: 'world',
-      meta: {key: 'hello', domain: 'config'},
+      meta: { key: 'hello', domain: 'config' },
     })
 
-    const setEntry3 = addMeta({key: 'blah', domain: 'config'})(setEntry)
+    const setEntry3 = addMeta({ key: 'blah', domain: 'config' })(setEntry)
     expect(setEntry3('hello', 'world')).to.deep.equal({
       type: 'SET_ENTRY',
       payload: 'world',
-      meta: {key: 'blah', domain: 'config'},
+      meta: { key: 'blah', domain: 'config' },
     })
   })
   it('works if the original action has no meta', () => {
@@ -33,11 +33,11 @@ describe('addMeta', () => {
       }
     }
 
-    const setValue2 = addMeta({domain: 'config'})(setValue)
+    const setValue2 = addMeta({ domain: 'config' })(setValue)
     expect(setValue2('hello')).to.deep.equal({
       type: 'SET_VALUE',
       payload: 'hello',
-      meta: {domain: 'config'},
+      meta: { domain: 'config' },
     })
   })
   it('works directly on actions instead of action creators', () => {
@@ -45,21 +45,24 @@ describe('addMeta', () => {
       return {
         type: 'SET_ENTRY',
         payload: value,
-        meta: {key}
+        meta: { key },
       }
     }
 
-    expect(addMeta({domain: 'config'})(setEntry('hello', 'world'))).to.deep.equal({
+    expect(
+      addMeta({ domain: 'config' })(setEntry('hello', 'world'))
+    ).to.deep.equal({
       type: 'SET_ENTRY',
       payload: 'world',
-      meta: {key: 'hello', domain: 'config'},
+      meta: { key: 'hello', domain: 'config' },
     })
 
-    expect(addMeta({key: 'blah', domain: 'config'})(setEntry('hello', 'world'))).to.deep.equal({
+    expect(
+      addMeta({ key: 'blah', domain: 'config' })(setEntry('hello', 'world'))
+    ).to.deep.equal({
       type: 'SET_ENTRY',
       payload: 'world',
-      meta: {key: 'blah', domain: 'config'},
+      meta: { key: 'blah', domain: 'config' },
     })
   })
 })
-

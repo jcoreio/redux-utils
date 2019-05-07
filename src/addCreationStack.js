@@ -9,4 +9,3 @@ export default function addCreationStack(fn, what) {
     }
   }
 }
-

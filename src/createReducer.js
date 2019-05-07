@@ -1,4 +1,4 @@
-import { size } from "lodash"
+import { size } from 'lodash'
 import checkForNonFunctions from './checkForNonFunctions'
 import addCreationStack from './addCreationStack'
 
@@ -18,11 +18,11 @@ export default function createReducer(initialState, actionHandlers) {
       let reducer = actionHandlers[action.type]
       return reducer ? reducer(state, action) : state
     }
-  }
-  else {
+  } else {
     result = (state = initialState) => state
   }
-  if (process.env.NODE_ENV !== 'production') result = addCreationStack(result, 'reducer')
+  if (process.env.NODE_ENV !== 'production')
+    result = addCreationStack(result, 'reducer')
   result.initialState = initialState
   result.actionHandlers = actionHandlers
   return result

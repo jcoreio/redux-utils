@@ -1,4 +1,4 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import sinon from 'sinon'
 import createReducer from '../src/createReducer'
 import composeReducers from '../src/composeReducers'
@@ -15,7 +15,7 @@ describe('dev mode warnings', () => {
     origNodeEnv = process.env.NODE_ENV
     process.env.NODE_ENV = ''
   })
-  after(() => process.env.NODE_ENV = origNodeEnv)
+  after(() => (process.env.NODE_ENV = origNodeEnv))
   beforeEach(() => {
     sinon.spy(console, 'error')
   })
@@ -24,11 +24,11 @@ describe('dev mode warnings', () => {
   })
   describe('createReducer', () => {
     it('warns if any actionHandlers are not functions', () => {
-      createReducer({hello: 'world'})
+      createReducer({ hello: 'world' })
       expect(console.error.called).to.be.true
     })
     it("doesn't warn if all actionHandlers are functions", () => {
-      createReducer({hello: () => 'world'})
+      createReducer({ hello: () => 'world' })
       expect(console.error.called).to.be.false
     })
   })
@@ -48,11 +48,11 @@ describe('dev mode warnings', () => {
   })
   describe('createMiddleware', () => {
     it('warns if any actionHandlers are not functions', () => {
-      createMiddleware({hello: 'world'})
+      createMiddleware({ hello: 'world' })
       expect(console.error.called).to.be.true
     })
     it("doesn't warn if all actionHandlers are functions", () => {
-      createMiddleware({hello: () => 'world'})
+      createMiddleware({ hello: () => 'world' })
       expect(console.error.called).to.be.false
     })
   })

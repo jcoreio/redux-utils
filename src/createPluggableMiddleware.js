@@ -1,4 +1,4 @@
-import { memoize } from "lodash"
+import { memoize } from 'lodash'
 import checkForNonFunctions from './checkForNonFunctions'
 
 /**
@@ -10,14 +10,18 @@ import checkForNonFunctions from './checkForNonFunctions'
  * hmrMiddleware.replaceMiddleware(myNewMiddleware);
  */
 export default function createPluggableMiddleware(middleware) {
-  if (process.env.NODE_ENV !== 'production') checkForNonFunctions(middleware, 'middleware')
+  if (process.env.NODE_ENV !== 'production')
+    checkForNonFunctions(middleware, 'middleware')
 
   const result = store => next => {
-    const dispatch = memoize(middleware => middleware ? middleware(store)(next) : next)
+    const dispatch = memoize(middleware =>
+      middleware ? middleware(store)(next) : next
+    )
     return action => dispatch(middleware)(action)
   }
   result.replaceMiddleware = nextMiddleware => {
-    if (process.env.NODE_ENV !== 'production') checkForNonFunctions(nextMiddleware, 'nextMiddleware')
+    if (process.env.NODE_ENV !== 'production')
+      checkForNonFunctions(nextMiddleware, 'nextMiddleware')
     middleware = nextMiddleware
   }
   return result

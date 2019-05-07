@@ -1,4 +1,4 @@
-import { every } from "lodash"
+import { every } from 'lodash'
 
 /* global console */
 
@@ -8,4 +8,3 @@ export default function checkForNotFunctions(collection, name) {
     console.error(error.stack) // eslint-disable-line no-console
   }
 }
-

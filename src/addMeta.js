@@ -5,11 +5,11 @@ export default function addMeta(meta) {
       meta: {
         ...action.meta,
         ...meta,
-      }
+      },
     }
   }
-  return actionOrCreator => actionOrCreator instanceof Function
-    ? (...args) => addMetaToAction(actionOrCreator(...args))
-    : addMetaToAction(actionOrCreator)
+  return actionOrCreator =>
+    actionOrCreator instanceof Function
+      ? (...args) => addMetaToAction(actionOrCreator(...args))
+      : addMetaToAction(actionOrCreator)
 }
-

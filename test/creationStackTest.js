@@ -1,5 +1,12 @@
-import {assert, expect} from 'chai'
-import {createReducer, composeReducers, createMiddleware, composeMiddleware, prefixReducer, fullStack} from '../src'
+import { assert, expect } from 'chai'
+import {
+  createReducer,
+  composeReducers,
+  createMiddleware,
+  composeMiddleware,
+  prefixReducer,
+  fullStack,
+} from '../src'
 
 describe('addCreationStack', () => {
   let origNodeEnv
@@ -7,13 +14,17 @@ describe('addCreationStack', () => {
     origNodeEnv = process.env.NODE_ENV
     process.env.NODE_ENV = ''
   })
-  after(() => process.env.NODE_ENV = origNodeEnv)
+  after(() => (process.env.NODE_ENV = origNodeEnv))
 
   describe('createReducer', () => {
     it('adds creation stack to errors', () => {
-      const r = createReducer({hello: () => { throw new Error('test') }})
+      const r = createReducer({
+        hello: () => {
+          throw new Error('test')
+        },
+      })
       try {
-        r({}, {type: 'hello'})
+        r({}, { type: 'hello' })
         assert.fail('expected error to be thrown')
       } catch (error) {
         expect(fullStack(error)).to.match(/caused by reducer created at/i)
@@ -22,9 +33,11 @@ describe('addCreationStack', () => {
   })
   describe('composeReducers', () => {
     it('adds creation stack to errors', () => {
-      const r = composeReducers(() => { throw new Error('test') })
+      const r = composeReducers(() => {
+        throw new Error('test')
+      })
       try {
-        r({}, {type: 'hello'})
+        r({}, { type: 'hello' })
         assert.fail('expected error to be thrown')
       } catch (error) {
         expect(fullStack(error)).to.match(/caused by reducer created at/i)
@@ -33,9 +46,13 @@ describe('addCreationStack', () => {
   })
   describe('createMiddleware', () => {
     it('adds creation stack to errors', () => {
-      const r = createMiddleware({hello: store => next => action => { throw new Error('test') }})
+      const r = createMiddleware({
+        hello: store => next => action => {
+          throw new Error('test')
+        },
+      })
       try {
-        r(null)(null)({type: 'hello'})
+        r(null)(null)({ type: 'hello' })
         assert.fail('expected error to be thrown')
       } catch (error) {
         expect(fullStack(error)).to.match(/caused by middleware created at/i)
@@ -46,10 +63,12 @@ describe('addCreationStack', () => {
     it('adds creation stack to errors', () => {
       const r = composeMiddleware(
         store => dispatch => dispatch,
-        store => next => action => { throw new Error('test') }
+        store => next => action => {
+          throw new Error('test')
+        }
       )
       try {
-        r(null)(null)({type: 'hello'})
+        r(null)(null)({ type: 'hello' })
         assert.fail('expected error to be thrown')
       } catch (error) {
         expect(fullStack(error)).to.match(/caused by middleware created at/i)
@@ -58,9 +77,11 @@ describe('addCreationStack', () => {
   })
   describe('prefixReducer', () => {
     it('adds creation stack to errors', () => {
-      const r = prefixReducer('hello')(() => { throw new Error('test') })
+      const r = prefixReducer('hello')(() => {
+        throw new Error('test')
+      })
       try {
-        r({}, {type: 'hello'})
+        r({}, { type: 'hello' })
         assert.fail('expected error to be thrown')
       } catch (error) {
         expect(fullStack(error)).to.match(/caused by reducer created at/i)
@@ -68,4 +89,3 @@ describe('addCreationStack', () => {
     })
   })
 })
-

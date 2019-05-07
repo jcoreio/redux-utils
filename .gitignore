@@ -5,3 +5,6 @@ lib
 module
 es
 .eslintcache
+/*.js
+/*.js.flow
+!/.babelrc.js
