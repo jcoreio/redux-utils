@@ -7,4 +7,7 @@ module.exports = {
   globals: {
     process: true,
   },
+  rules: {
+    '@typescript-eslint/ban-types': 0,
+  },
 }

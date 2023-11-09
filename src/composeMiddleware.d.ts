@@ -1,9 +1,17 @@
-import { Middleware } from 'redux'
+import { Dispatch, Middleware } from 'redux'
 
-export function combineMiddlewareWithActionHandlers(
-  ...middlewares: Middleware[]
-): Middleware
+export function combineMiddlewareWithActionHandlers<
+  DispatchExt = {},
+  S = any,
+  D extends Dispatch = Dispatch
+>(
+  ...middlewares: Middleware<DispatchExt, S, D>[]
+): Middleware<DispatchExt, S, D>
 
-export default function composeMiddleware(
-  ...middlewares: Middleware[]
-): Middleware
+export default function composeMiddleware<
+  DispatchExt = {},
+  S = any,
+  D extends Dispatch = Dispatch
+>(
+  ...middlewares: Middleware<DispatchExt, S, D>[]
+): Middleware<DispatchExt, S, D>

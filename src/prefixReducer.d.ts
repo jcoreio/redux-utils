@@ -1,5 +1,7 @@
-import { Reducer } from 'redux'
+import { AnyAction, Reducer } from 'redux'
 
 export default function prefixReducer(
   prefix: string
-): <S>(reducer: Reducer<S>) => Reducer<S>
+): <S = any, A extends AnyAction = AnyAction>(
+  reducer: Reducer<S, A>
+) => Reducer<S, A>
