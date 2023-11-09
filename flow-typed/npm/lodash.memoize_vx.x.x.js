@@ -14,7 +14,7 @@
  */
 
 declare module 'lodash.memoize' {
-  declare module.exports: any;
+  declare module.exports: any
 }
 
 /**
@@ -23,11 +23,10 @@ declare module 'lodash.memoize' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'lodash.memoize/index' {
-  declare module.exports: $Exports<'lodash.memoize'>;
+  declare module.exports: $Exports<'lodash.memoize'>
 }
 declare module 'lodash.memoize/index.js' {
-  declare module.exports: $Exports<'lodash.memoize'>;
+  declare module.exports: $Exports<'lodash.memoize'>
 }

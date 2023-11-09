@@ -14,7 +14,7 @@
  */
 
 declare module 'lodash.compact' {
-  declare module.exports: any;
+  declare module.exports: any
 }
 
 /**
@@ -23,11 +23,10 @@ declare module 'lodash.compact' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'lodash.compact/index' {
-  declare module.exports: $Exports<'lodash.compact'>;
+  declare module.exports: $Exports<'lodash.compact'>
 }
 declare module 'lodash.compact/index.js' {
-  declare module.exports: $Exports<'lodash.compact'>;
+  declare module.exports: $Exports<'lodash.compact'>
 }

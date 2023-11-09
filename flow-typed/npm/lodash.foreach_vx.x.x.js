@@ -14,7 +14,7 @@
  */
 
 declare module 'lodash.foreach' {
-  declare module.exports: any;
+  declare module.exports: any
 }
 
 /**
@@ -23,11 +23,10 @@ declare module 'lodash.foreach' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'lodash.foreach/index' {
-  declare module.exports: $Exports<'lodash.foreach'>;
+  declare module.exports: $Exports<'lodash.foreach'>
 }
 declare module 'lodash.foreach/index.js' {
-  declare module.exports: $Exports<'lodash.foreach'>;
+  declare module.exports: $Exports<'lodash.foreach'>
 }

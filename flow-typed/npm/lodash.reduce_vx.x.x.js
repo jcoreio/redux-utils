@@ -14,7 +14,7 @@
  */
 
 declare module 'lodash.reduce' {
-  declare module.exports: any;
+  declare module.exports: any
 }
 
 /**
@@ -23,11 +23,10 @@ declare module 'lodash.reduce' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'lodash.reduce/index' {
-  declare module.exports: $Exports<'lodash.reduce'>;
+  declare module.exports: $Exports<'lodash.reduce'>
 }
 declare module 'lodash.reduce/index.js' {
-  declare module.exports: $Exports<'lodash.reduce'>;
+  declare module.exports: $Exports<'lodash.reduce'>
 }

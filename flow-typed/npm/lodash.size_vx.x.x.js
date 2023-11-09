@@ -14,7 +14,7 @@
  */
 
 declare module 'lodash.size' {
-  declare module.exports: any;
+  declare module.exports: any
 }
 
 /**
@@ -23,11 +23,10 @@ declare module 'lodash.size' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'lodash.size/index' {
-  declare module.exports: $Exports<'lodash.size'>;
+  declare module.exports: $Exports<'lodash.size'>
 }
 declare module 'lodash.size/index.js' {
-  declare module.exports: $Exports<'lodash.size'>;
+  declare module.exports: $Exports<'lodash.size'>
 }

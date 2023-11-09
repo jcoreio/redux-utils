@@ -13,8 +13,8 @@ describe('prefixReducer', () => {
   })
   it('works for action map reducer', () => {
     const reducer = createReducer(0, {
-      INCREMENT: state => state + 1,
-      DECREMENT: state => state - 1,
+      INCREMENT: (state) => state + 1,
+      DECREMENT: (state) => state - 1,
     })
     const reducer2 = prefixReducer('TEST.')(reducer)
     expect(reducer2.initialState).to.equal(0)

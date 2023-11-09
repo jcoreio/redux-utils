@@ -118,8 +118,8 @@ import { combineReducers } from 'redux'
 import { createReducer, prefixReducer } from 'mindfront-redux-utils'
 
 const counterReducer = createReducer(0, {
-  DECREMENT: state => state - 1,
-  INCREMENT: state => state + 1,
+  DECREMENT: (state) => state - 1,
+  INCREMENT: (state) => state + 1,
 })
 
 const reducer = combineReducers({

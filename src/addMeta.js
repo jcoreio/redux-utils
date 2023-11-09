@@ -8,7 +8,7 @@ export default function addMeta(meta) {
       },
     }
   }
-  return actionOrCreator =>
+  return (actionOrCreator) =>
     actionOrCreator instanceof Function
       ? (...args) => addMetaToAction(actionOrCreator(...args))
       : addMetaToAction(actionOrCreator)

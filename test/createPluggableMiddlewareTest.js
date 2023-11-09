@@ -8,8 +8,8 @@ describe('createPluggableMiddleware', () => {
       dispatch(action) {},
     }
     sinon.spy(store, 'dispatch')
-    let middleware = createPluggableMiddleware(store => next => action =>
-      store.dispatch({ type: 'test' })
+    let middleware = createPluggableMiddleware(
+      (store) => (next) => (action) => store.dispatch({ type: 'test' })
     )
     middleware(store)(() => {})({ type: 'ignored' })
     expect(store.dispatch.args).to.deep.equal([[{ type: 'test' }]])
@@ -19,11 +19,11 @@ describe('createPluggableMiddleware', () => {
       dispatch(action) {},
     }
     sinon.spy(store, 'dispatch')
-    let middleware = createPluggableMiddleware(store => next => action =>
-      store.dispatch({ type: 'test' })
+    let middleware = createPluggableMiddleware(
+      (store) => (next) => (action) => store.dispatch({ type: 'test' })
     )
-    middleware.replaceMiddleware(store => next => action =>
-      store.dispatch({ type: 'test2' })
+    middleware.replaceMiddleware(
+      (store) => (next) => (action) => store.dispatch({ type: 'test2' })
     )
     middleware(store)(() => {})({ type: 'ignored' })
     expect(store.dispatch.args).to.deep.equal([[{ type: 'test2' }]])

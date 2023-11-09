@@ -13,17 +13,17 @@ describe('applyMiddleware', () => {
     let callsB2 = []
     let callsC1 = []
     let calls3 = []
-    let middlewareA1 = store => next => action =>
+    let middlewareA1 = (store) => (next) => (action) =>
       callsA1.push({ action, index: index++ }) && next(action)
-    let middlewareA2 = store => next => action =>
+    let middlewareA2 = (store) => (next) => (action) =>
       callsA2.push({ action, index: index++ }) && next(action)
-    let middlewareA3 = store => next => action =>
+    let middlewareA3 = (store) => (next) => (action) =>
       callsA3.push({ action, index: index++ }) && next(action)
-    let middlewareB1 = store => next => action =>
+    let middlewareB1 = (store) => (next) => (action) =>
       callsB1.push({ action, index: index++ }) && next(action)
-    let middlewareB2 = store => next => action =>
+    let middlewareB2 = (store) => (next) => (action) =>
       callsB2.push({ action, index: index++ }) && next(action)
-    let middlewareC1 = store => next => action =>
+    let middlewareC1 = (store) => (next) => (action) =>
       callsC1.push({ action, index: index++ }) && next(action)
 
     let middleware1 = createMiddleware({
@@ -34,7 +34,7 @@ describe('applyMiddleware', () => {
       b: middlewareB1,
       c: middlewareC1,
     })
-    let middleware3 = store => next => action =>
+    let middleware3 = (store) => (next) => (action) =>
       calls3.push({ action, index: index++ }) && next(action)
     let middleware4 = createMiddleware({
       a: middlewareA2,

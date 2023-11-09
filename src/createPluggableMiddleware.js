@@ -13,13 +13,13 @@ export default function createPluggableMiddleware(middleware) {
   if (process.env.NODE_ENV !== 'production')
     checkForNonFunctions(middleware, 'middleware')
 
-  const result = store => next => {
-    const dispatch = memoize(middleware =>
+  const result = (store) => (next) => {
+    const dispatch = memoize((middleware) =>
       middleware ? middleware(store)(next) : next
     )
-    return action => dispatch(middleware)(action)
+    return (action) => dispatch(middleware)(action)
   }
-  result.replaceMiddleware = nextMiddleware => {
+  result.replaceMiddleware = (nextMiddleware) => {
     if (process.env.NODE_ENV !== 'production')
       checkForNonFunctions(nextMiddleware, 'nextMiddleware')
     middleware = nextMiddleware

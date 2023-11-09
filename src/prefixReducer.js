@@ -3,7 +3,7 @@ import createReducer from './createReducer'
 import addCreationStack from './addCreationStack'
 
 export default function prefixReducer(prefix) {
-  return reducer => {
+  return (reducer) => {
     if (reducer.actionHandlers instanceof Object) {
       return createReducer(
         reducer.initialState,

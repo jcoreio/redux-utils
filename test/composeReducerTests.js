@@ -99,7 +99,7 @@ describe('composeReducers', () => {
           return state - 3
         },
       }),
-      state => state + 0.5,
+      (state) => state + 0.5,
       createReducer(0, {
         action1(state) {
           return state * 3

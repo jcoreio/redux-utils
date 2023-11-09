@@ -8,7 +8,7 @@ import checkForNonFunctions from './checkForNonFunctions'
  * @returns a reducer that calls all of the given reducers in sequence.
  */
 function naiveComposeReducers(reducers) {
-  if (reducers.length === 0) return state => state
+  if (reducers.length === 0) return (state) => state
   if (reducers.length === 1) return reducers[0]
   const initialState = reducers.reduce(
     (state, reducer) => reducer(state, { type: '' }),
@@ -33,7 +33,7 @@ export function combineReducersWithActionHandlers(...reducers) {
   let initialState = undefined
   let actionHandlers = {}
 
-  reducers.forEach(reducer => {
+  reducers.forEach((reducer) => {
     if (reducer.actionHandlers) {
       initialState = reducer(initialState, { type: '' })
       forEach(reducer.actionHandlers, (actionHandler, type) => {

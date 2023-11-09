@@ -8,9 +8,9 @@ import addCreationStack from './addCreationStack'
  * @returns a middleware that calls all of the given middlewares in sequence.
  */
 function naiveComposeMiddleware(middlewares) {
-  if (middlewares.length === 0) return store => dispatch => dispatch
+  if (middlewares.length === 0) return (store) => (dispatch) => dispatch
   if (middlewares.length === 1) return middlewares[0]
-  return store => next => {
+  return (store) => (next) => {
     let handleAction = middlewares.reduceRight(
       (next, handler) => handler(store)(next),
       next
@@ -32,7 +32,7 @@ export function combineMiddlewareWithActionHandlers(...middlewares) {
   const optimizedMiddlewares = []
   let actionHandlers = {}
 
-  middlewares.forEach(middleware => {
+  middlewares.forEach((middleware) => {
     if (middleware.actionHandlers) {
       forEach(middleware.actionHandlers, (actionHandler, type) => {
         ;(actionHandlers[type] || (actionHandlers[type] = [])).push(

@@ -14,7 +14,7 @@
  */
 
 declare module 'lodash.mapkeys' {
-  declare module.exports: any;
+  declare module.exports: any
 }
 
 /**
@@ -23,11 +23,10 @@ declare module 'lodash.mapkeys' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'lodash.mapkeys/index' {
-  declare module.exports: $Exports<'lodash.mapkeys'>;
+  declare module.exports: $Exports<'lodash.mapkeys'>
 }
 declare module 'lodash.mapkeys/index.js' {
-  declare module.exports: $Exports<'lodash.mapkeys'>;
+  declare module.exports: $Exports<'lodash.mapkeys'>
 }

@@ -16,15 +16,15 @@ describe('composeMiddleware', () => {
     let index = 0
     let callsA = []
     let callsB = []
-    let middlewareA = store => next => action =>
+    let middlewareA = (store) => (next) => (action) =>
       callsA.push({ store, action, index: index++ }) && next(action)
-    let middlewareB = store => next => action =>
+    let middlewareB = (store) => (next) => (action) =>
       callsB.push({ store, action, index: index++ }) && next(action)
     let middleware = composeMiddleware(middlewareA, middlewareB)
 
     let store = { store: true }
     let callsNext = []
-    let next = action => callsNext.push({ action, index: index++ })
+    let next = (action) => callsNext.push({ action, index: index++ })
 
     let action = { type: 'a' }
     middleware(store)(next)(action)
@@ -39,15 +39,15 @@ describe('composeMiddleware', () => {
     let callsB1 = []
     let callsB2 = []
     let callsC1 = []
-    let middlewareA1 = store => next => action =>
+    let middlewareA1 = (store) => (next) => (action) =>
       callsA1.push({ store, action, index: index++ }) && next(action)
-    let middlewareA2 = store => next => action =>
+    let middlewareA2 = (store) => (next) => (action) =>
       callsA2.push({ store, action, index: index++ }) && next(action)
-    let middlewareB1 = store => next => action =>
+    let middlewareB1 = (store) => (next) => (action) =>
       callsB1.push({ store, action, index: index++ }) && next(action)
-    let middlewareB2 = store => next => action =>
+    let middlewareB2 = (store) => (next) => (action) =>
       callsB2.push({ store, action, index: index++ }) && next(action)
-    let middlewareC1 = store => next => action =>
+    let middlewareC1 = (store) => (next) => (action) =>
       callsC1.push({ store, action, index: index++ }) && next(action)
 
     let middleware1 = createMiddleware({
@@ -66,7 +66,7 @@ describe('composeMiddleware', () => {
 
     let store = { store: true }
     let callsNext = []
-    let next = action => callsNext.push({ action, index: index++ })
+    let next = (action) => callsNext.push({ action, index: index++ })
 
     let action = { type: 'a' }
     middleware(store)(next)(action)
@@ -112,17 +112,17 @@ describe('composeMiddleware', () => {
     let callsB2 = []
     let callsC1 = []
     let calls3 = []
-    let middlewareA1 = store => next => action =>
+    let middlewareA1 = (store) => (next) => (action) =>
       callsA1.push({ store, action, index: index++ }) && next(action)
-    let middlewareA2 = store => next => action =>
+    let middlewareA2 = (store) => (next) => (action) =>
       callsA2.push({ store, action, index: index++ }) && next(action)
-    let middlewareA3 = store => next => action =>
+    let middlewareA3 = (store) => (next) => (action) =>
       callsA3.push({ store, action, index: index++ }) && next(action)
-    let middlewareB1 = store => next => action =>
+    let middlewareB1 = (store) => (next) => (action) =>
       callsB1.push({ store, action, index: index++ }) && next(action)
-    let middlewareB2 = store => next => action =>
+    let middlewareB2 = (store) => (next) => (action) =>
       callsB2.push({ store, action, index: index++ }) && next(action)
-    let middlewareC1 = store => next => action =>
+    let middlewareC1 = (store) => (next) => (action) =>
       callsC1.push({ store, action, index: index++ }) && next(action)
 
     let middleware1 = createMiddleware({
@@ -133,7 +133,7 @@ describe('composeMiddleware', () => {
       b: middlewareB1,
       c: middlewareC1,
     })
-    let middleware3 = store => next => action =>
+    let middleware3 = (store) => (next) => (action) =>
       calls3.push({ store, action, index: index++ }) && next(action)
     let middleware4 = createMiddleware({
       a: middlewareA2,
@@ -150,7 +150,7 @@ describe('composeMiddleware', () => {
 
     let store = { store: true }
     let callsNext = []
-    let next = action => callsNext.push({ action, index: index++ })
+    let next = (action) => callsNext.push({ action, index: index++ })
 
     let action = { type: 'a' }
     middleware(store)(next)(action)

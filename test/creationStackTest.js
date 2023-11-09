@@ -47,7 +47,7 @@ describe('addCreationStack', () => {
   describe('createMiddleware', () => {
     it('adds creation stack to errors', () => {
       const r = createMiddleware({
-        hello: store => next => action => {
+        hello: (store) => (next) => (action) => {
           throw new Error('test')
         },
       })
@@ -62,8 +62,8 @@ describe('addCreationStack', () => {
   describe('composeMiddleware', () => {
     it('adds creation stack to errors', () => {
       const r = composeMiddleware(
-        store => dispatch => dispatch,
-        store => next => action => {
+        (store) => (dispatch) => dispatch,
+        (store) => (next) => (action) => {
           throw new Error('test')
         }
       )
