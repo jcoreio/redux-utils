@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Middleware, Reducer, applyMiddleware, createStore } from 'redux'
+import {
+  Dispatch,
+  Middleware,
+  Reducer,
+  applyMiddleware,
+  createStore,
+} from 'redux'
 import { composeMiddleware, composeReducers, createReducer } from '../src'
 
 export const LOGIN = 'login'
@@ -116,33 +122,41 @@ type AsyncAction<V> = {
   perform: () => Promise<V>
 }
 
+function asyncAction<V>(perform: () => Promise<V>): AsyncAction<V> {
+  return { type: 'async', perform }
+}
+
 const asyncActionMiddleware: Middleware<
   {
     <V>(action: AsyncAction<V>): Promise<V>
   },
-  Auth
+  Auth,
+  Dispatch<AuthAction>
 > = (store) => (next) => (action) => null as any
 
 type FooAction = {
   type: 'foo'
 }
 
+function fooAction(): FooAction {
+  return { type: 'foo' }
+}
+
 const fooActionMiddleware: Middleware<
   {
     (action: FooAction): 'foo'
   },
-  Auth
+  Auth,
+  Dispatch<AuthAction>
 > = (store) => (next) => (action) => null as any
 
-const store = applyMiddleware(
-  composeMiddleware(asyncActionMiddleware, fooActionMiddleware)
-)(createStore)(reducer1)
+const store = createStore(
+  reducer1,
+  applyMiddleware(composeMiddleware(asyncActionMiddleware, fooActionMiddleware))
+)
 
-const value1: 'foo' = store.dispatch({ type: 'foo' })
-const value2: Promise<number> = store.dispatch({
-  type: 'async',
-  perform: async () => 3,
-})
+const value1: 'foo' = store.dispatch(fooAction())
+const value2: Promise<number> = store.dispatch(asyncAction(async () => 3))
 const value3: LoginAction = store.dispatch({
   type: 'login',
   payload: { password: 'foo' },
